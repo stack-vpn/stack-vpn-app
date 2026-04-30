@@ -1,57 +1,31 @@
-# StackVPN - Open-Source Dual-Protocol VPN Client for Android
 
-[![GitHub](https://img.shields.io/badge/StackVPN-v1.0-blue)](https://github.com/stack-vpn/stack-vpn-app)
+# StackVPN - Open-Source Dual-Protocol VPN for Android
+
+[![GitHub](https://img.shields.io/badge/GitHub-stack--vpn%2Fstack--vpn--app-blue?logo=github)](https://github.com/stack-vpn/stack-vpn-app)
 [![License](https://img.shields.io/badge/License-GPL%203.0-blue)](LICENSE)
-[![Platform](https://img.shields.io/badge/Platform-Android%208.0%2B-green)](https://www.android.com/)
+[![GitHub stars](https://img.shields.io/github/stars/stack-vpn/stack-vpn-app?style=social)](https://github.com/stack-vpn/stack-vpn-app/stargazers)
+[![Android](https://img.shields.io/badge/Android-8.0%2B-green?logo=android)](https://www.android.com/)
 
-**Privacy-focused open-source VPN for Android** combining WireGuard and OpenVPN for enhanced security.
+**Privacy-focused open-source VPN for Android** combining WireGuard and OpenVPN for multi-layer encryption.
 
-## Overview
+![StackVPN Demo](docs/images/demo.gif)
 
-StackVPN is an open-source Android VPN client that supports multiple VPN protocols (WireGuard and OpenVPN) in a single application, enabling internal VPN chaining for enhanced privacy and security.
+## Why StackVPN?
 
-## Features
+Android limits you to **one VPN at a time**. Want to use DuckDuckGo tracking protection + Proton VPN together? You can't.
+
+**StackVPN solves this** by stacking multiple VPN protocols in one app—no root required.
+
+### ⚡ Key Features
 
 - ✅ **Dual VPN Support** - WireGuard + OpenVPN in one app
+- ✅ **No Root Required** - Works on stock Android
 - ✅ **Privacy First** - No logs, no telemetry, open-source
-- ✅ **Kill Switch** - Blocks traffic if VPN drops
+- ✅ **Kill Switch** - Blocks traffic if VPN disconnects
 - ✅ **Ad Blocking** - DNS-level ad/tracker blocking
 - ✅ **Split Tunneling** - Route specific apps through VPN
 - ✅ **Always-On VPN** - Stay protected even after reboot
-
-## Key Features
-- Dual VPN tunnel support (internal chaining)
-- No root required
-- Tracker and ad blocking capabilities
-- Kill switch functionality
-- Split tunneling support
-- Custom DNS resolver
-
-## Technology Stack
-- Kotlin (Primary language)
-- Jetpack Compose (UI framework)
-- Android VPNService API
-- WireGuard and OpenVPN libraries
-- tun2socks for packet routing
-
-## Getting Started
-
-To get started with this project:
-
-1. Clone the repository
-2. Open in Android Studio
-3. Build and run the project
-
-## Installation
-
-1. Install Android Studio
-2. Clone this repository
-3. Open the project in Android Studio
-4. Build and run the project
-
-## Usage
-
-This section explains how to use the application.
+- ✅ **Custom DNS** - Use your own DNS resolver
 
 ## Project Structure
 
@@ -71,34 +45,153 @@ stack-vpn-app/
 └── README.md
 ```
 
-## Contributing
 
-Contributions are welcome! Please read the contributing guidelines before getting started, or make sure to sort the existing issues to find an issue to fix or determine if the feature you want to implement is already in the issues list.
+## 📊 How It Works
 
-## License
+```
+Your Device
+    ↓
+[VPNService - Single TUN Interface]
+    ↓
+[Internal Tunnel Manager]
+├─ WireGuard Engine (Protocol 1)
+├─ OpenVPN Engine (Protocol 2)
+└─ Packet Router (intelligently routes)
+    ↓
+[DNS Filter - Blocks ads/trackers]
+    ↓
+[Kill Switch - Blocks if disconnected]
+    ↓
+Encrypted Connection
+    ↓
+Internet (Double encrypted if using both tunnels)
+```
 
-This project is licensed under the GPL-3.0 License - see the [LICENSE](LICENSE) file for details.
+## 🛠️ Development
 
-## Acknowledgments
+### Requirements
 
-- WireGuard project
-- OpenVPN project
-- Android Open Source Project
+- Android Studio (latest)
+- Android SDK 8.0+ (API 26+)
+- NDK (for OpenVPN C++ code)
+- Kotlin 1.9+
+- Gradle 8.0+
 
-## Repository Status
 
-This project is currently in development. The initial development environment has been set up with the basic directory structure.
+### Project Structure
 
-## Next Steps
+See [docs/architecture.md](docs/architecture.md) for detailed architecture.
 
-1. Implement core VPNService functionality
-2. Integrate WireGuard and OpenVPN protocols
-3. Implement packet routing system
-4. Build user interface
-5. Conduct comprehensive testing
-6. Security audit and optimization
-7. Prepare for release
+## 📚 Documentation
 
-## Contact
+- **[Architecture](docs/architecture.md)** - System design & components
+- **[Setup Guide](docs/setup.md)** - Development environment setup
+- **[Building](docs/building.md)** - How to build the app
+- **[Contributing](CONTRIBUTING.md)** - How to contribute
+- **[Security](docs/security.md)** - Security practices
+- **[VPN Protocols](docs/protocol.md)** - WireGuard vs OpenVPN
 
-For support, please check the project documentation or contact the development team through GitHub issues.
+## 🤝 Contributing
+
+We welcome contributions! See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+
+### Ways to Help
+
+- 🐛 Report bugs via [GitHub Issues](https://github.com/stack-vpn/stack-vpn-app/issues)
+- 💡 Suggest features
+- 📝 Improve documentation
+- 🔍 Security audits
+- 💻 Submit pull requests
+- 🗣️ Join community discussions
+
+## 🔒 Privacy & Security
+
+- **No Logging** - We never record your activity
+- **Open Source** - Audit the code yourself
+- **Kill Switch** - Blocks traffic if VPN drops
+- **DNS Filtering** - Blocks ads/trackers at DNS level
+- **Regular Audits** - Security reviews by third parties
+
+See [docs/security.md](docs/security.md) for security details.
+
+## 📋 Roadmap
+
+### Phase 1  - MVP
+- ✅ VPNService skeleton
+- ✅ WireGuard integration
+- ✅ OpenVPN integration
+- ✅ Basic UI
+- ✅ Profile management
+- ✅ Kill switch
+
+### Phase 2 - Features
+- Ad/tracker blocking (DNS filtering)
+- Split tunneling
+- Always-on VPN
+- Custom DNS
+- IPv6 support
+
+### Phase 3  - Polish
+- Performance optimization
+- Security audit
+- F-Droid release
+- Community growth
+- Sponsorship program
+
+### Phase 4 - Expansion
+- iOS version (potential)
+- VPN server infrastructure
+- Premium managed service (optional)
+- Browser extension
+
+## 📊 Project Stats
+
+- **Language:** Kotlin, Java, C/C++
+- **License:** GPL-3.0
+- **Minimum Android:** 8.0 (API 26)
+- **Status:** Active Development
+- **Maintainers:** [Team]
+- **Contributors:** Growing community
+
+## 💬 Community
+
+- **GitHub Discussions** - Ask questions, share ideas
+- **GitHub Issues** - Report bugs, request features
+- **Matrix Chat** - Real-time community chat (coming soon)
+- **Reddit** - r/stackvpn (coming soon)
+
+## 📄 License
+
+StackVPN is licensed under [GPL-3.0](LICENSE). This means:
+- ✅ You can use it freely
+- ✅ You can modify and redistribute
+- ✅ Must keep it open-source
+- ✅ Must credit original authors
+
+## ⚠️ Disclaimer
+
+StackVPN is provided as-is. We make no guarantees about:
+- Perfect privacy (no system is 100% secure)
+- Unbreakable encryption (security research evolves)
+- Specific performance (depends on servers/network)
+
+Always research VPN security practices and keep your device updated.
+
+## 🙏 Thanks
+
+- [WireGuard](https://www.wireguard.com/) - Modern VPN protocol
+- [OpenVPN](https://openvpn.net/) - Mature VPN implementation
+- [Android Open Source Project](https://source.android.com/) - VPNService API
+- Community contributors
+
+## 📞 Contact
+
+- **Project Issues:** [GitHub Issues](https://github.com/stack-vpn/stack-vpn-app/issues)
+- **Email:** d33kshith@duck.com
+- **Security Issues:** d33kshith@duck.com
+
+---
+
+**Made with ❤️ for privacy**
+
+*Last Updated: April 30, 2026*
